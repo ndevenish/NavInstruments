@@ -44,6 +44,14 @@ namespace NavUtilLib
         //private System.Collections.Generic.List<bool> bList;
 
 
+        // If given a telemachus registration action, use it
+        public static Action<object> TelemachusPluginRegister {
+            set {
+                if (value != null) {
+                    value(new TelemachusNavutilitiesPlugin());
+                }
+            }
+        }
 
 
 
