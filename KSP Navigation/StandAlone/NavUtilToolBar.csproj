@@ -33,16 +33,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\References\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\ksp-telemachus-dev\KSP_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="Toolbar">
-      <HintPath>..\..\..\References\Toolbar.dll</HintPath>
+      <HintPath>..\..\..\ksp-telemachus-dev\GameData\000_Toolbar\Toolbar.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\References\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\ksp-telemachus-dev\KSP_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +56,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "C:\Users\Daniel\Desktop\NavInstruments\GameData\KerbalScienceFoundation\NavInstruments"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "C:\Telemachus\ksp-telemachus-dev\GameData\KerbalScienceFoundation\NavInstruments"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
