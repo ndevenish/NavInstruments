@@ -1,5 +1,7 @@
+using NavUtilLib;
+using NavUtilLib.GlobalVariables;
 using System;
-
+using System.Collections.Generic;
 
 public class TelemachusNavutilitiesPlugin
 {
@@ -11,20 +13,33 @@ public class TelemachusNavutilitiesPlugin
 
     public Func<Vessel, string[], object> GetAPIHandler(string API)
     {
-        if (SimpleValues.ContainsKey(API.ToLowerInvariant()) {
-            return (v, a) => SimpleValues[API.ToLowerInvariant()](NavUtilLib.GlobalVariables.FlightData);
+        if (SimpleValues.ContainsKey(API.ToLowerInvariant()))
+        {
+            return (v, a) => SimpleValues[API.ToLowerInvariant()]();
         }
         return null;
     }
 
-    private static Dictionary<string, Func<FlightData, float>> SimpleValues = new Dictionary<string, Func<FlightData, float>>() {
-        {"navutil.glideslope",     fd => fd.selectedGlideSlope},
-        {"navutil.bearing",        fd => fd.bearing},
-        {"navutil.dme",            fd => fd.dme},
-        {"navutil.elevationangle", fd => fd.elevationAngle},
-        {"navutil.locdeviation",   fd => fd.locDeviation},
-        {"navutil.gsdeviation",    fd => fd.gsDeviation},
-        {"navutil.runwayheading",  fd => fd.runwayHeading},
+    private static Dictionary<string, object> GetRunwayInformation(Runway runway)
+    {
+        var info = new Dictionary<string, object>();
+        info["markers"] = new[] { FlightData.selectedRwy.outerMarkerDist, FlightData.selectedRwy.middleMarkerDist, FlightData.selectedRwy.innerMarkerDist };
+        info["identity"] = runway.ident;
+        info["altitude"] = runway.altMSL;
+
+        return info;
+    }
+
+    private static Dictionary<string, Func<object>> SimpleValues = new Dictionary<string, Func<object>>() {
+        {"navutil.glideslope",     () => FlightData.selectedGlideSlope},
+        {"navutil.bearing",        () => FlightData.bearing},
+        {"navutil.dme",            () => FlightData.dme},
+        {"navutil.elevationangle", () => FlightData.elevationAngle},
+        {"navutil.locdeviation",   () => FlightData.locDeviation},
+        {"navutil.gsdeviation",    () => FlightData.gsDeviation},
+        {"navutil.headingtorunway",() => FlightData.runwayHeading},
+        {"navutil.runway",         () => GetRunwayInformation(FlightData.selectedRwy) }, 
+
     };
 
 

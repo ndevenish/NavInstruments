@@ -54,6 +54,7 @@
     <Compile Include="NavUtilLibHelper.cs" />
     <Compile Include="RunwaysEditor.cs" />
     <Compile Include="SettingsGUI.cs" />
+    <Compile Include="TelemachusPlugin.cs" />
     <Compile Include="TextWriter.cs" />
     <Compile Include="Runway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
