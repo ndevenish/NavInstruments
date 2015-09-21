@@ -22,11 +22,12 @@ public class TelemachusNavutilitiesPlugin
 
     private static Dictionary<string, object> GetRunwayInformation(Runway runway)
     {
+        if (runway == null) return null;
         var info = new Dictionary<string, object>();
-        info["markers"] = new[] { FlightData.selectedRwy.outerMarkerDist, FlightData.selectedRwy.middleMarkerDist, FlightData.selectedRwy.innerMarkerDist };
+        info["markers"] = new[] { runway.outerMarkerDist, runway.middleMarkerDist, runway.innerMarkerDist };
         info["identity"] = runway.ident;
         info["altitude"] = runway.altMSL;
-
+        info["heading"] = runway.hdg;
         return info;
     }
 
@@ -37,7 +38,7 @@ public class TelemachusNavutilitiesPlugin
         {"navutil.elevationangle", () => FlightData.elevationAngle},
         {"navutil.locdeviation",   () => FlightData.locDeviation},
         {"navutil.gsdeviation",    () => FlightData.gsDeviation},
-        {"navutil.headingtorunway",() => FlightData.runwayHeading},
+        {"navutil.runwayheading",() => FlightData.runwayHeading},
         {"navutil.runway",         () => GetRunwayInformation(FlightData.selectedRwy) }, 
 
     };
