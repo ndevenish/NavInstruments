@@ -15,8 +15,13 @@ public class TelemachusNavutilitiesPlugin
     {
         if (SimpleValues.ContainsKey(API.ToLowerInvariant()))
         {
-            return (v, a) => SimpleValues[API.ToLowerInvariant()]();
+            return (v, a) =>
+            {
+                if (FlightData.GetLastNavUpdateUT() + 0.05 < Planetarium.GetUniversalTime()) FlightData.updateNavigationData();
+                return SimpleValues[API.ToLowerInvariant()]();
+            };
         }
+        
         return null;
     }
 
